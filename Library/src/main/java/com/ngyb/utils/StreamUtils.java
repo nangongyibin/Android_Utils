@@ -1,4 +1,4 @@
-package com.ngyb.androidutils;
+package com.ngyb.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

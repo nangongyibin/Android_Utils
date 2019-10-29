@@ -1,4 +1,4 @@
-package com.ngyb.androidutils;
+package com.ngyb.utils;
 
 import org.junit.Test;
 

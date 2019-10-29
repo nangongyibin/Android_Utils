@@ -1,4 +1,4 @@
-package com.ngyb.androidutils;
+package com.ngyb.utils;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
