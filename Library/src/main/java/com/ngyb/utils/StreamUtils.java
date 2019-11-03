@@ -1,5 +1,7 @@
 package com.ngyb.utils;
 
+import android.os.Build;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +30,14 @@ public class StreamUtils {
         } catch (IOException e) {
             e.printStackTrace();
             return "";
+        }
+    }
+
+    public void close(AutoCloseable autoCloseable) throws Exception {
+        if (autoCloseable != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                autoCloseable.close();
+            }
         }
     }
 }
