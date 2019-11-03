@@ -3,6 +3,8 @@ package com.ngyb.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.lang.invoke.ConstantCallSite;
+
 /**
  * 作者：南宫燚滨
  * 描述：
@@ -41,5 +43,19 @@ public class SharedPreferencesUtils {
             sp = ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
         }
         return sp.getBoolean(key, defValue);
+    }
+
+    public void setInt(String key,int value){
+        if (sp==null){
+            sp =ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
+        }
+        sp.edit().putInt(key,value).apply();
+    }
+
+    public int getInt(String key,int defValue){
+        if (sp==null){
+            sp =ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
+        }
+        return sp.getInt(key,defValue);
     }
 }
