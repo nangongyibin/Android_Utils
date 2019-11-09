@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import com.ngyb.utils.bean.AppInfoBean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,5 +68,41 @@ public class AppUtils {
             appInfoBeanList.add(appInfoBean);
         }
         return appInfoBeanList;
+    }
+
+    /**
+     * @param context     上下文
+     * @param packagename 包名
+     * @return APPname
+     */
+    public String getAppName(Context context, String packagename) {
+        String name = "未知应用";
+        try {
+            PackageManager pm = context.getPackageManager();
+            ApplicationInfo applicationInfo = pm.getApplicationInfo(packagename, 0);
+            name = applicationInfo.loadLabel(pm).toString();
+        } catch (PackageManager.NameNotFoundException e) {
+            name = "未知应用";
+            e.printStackTrace();
+        }
+        return name;
+    }
+
+    /**
+     * @param context     上下文
+     * @param packagename 包名
+     * @return 应用图标
+     */
+    public Drawable getAppDrawable(Context context, String packagename) {
+        Drawable drawable = null;
+        try {
+            PackageManager pm = context.getPackageManager();
+            ApplicationInfo applicationInfo = pm.getApplicationInfo(packagename, 0);
+            drawable = applicationInfo.loadIcon(pm);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            drawable = context.getResources().getDrawable(R.drawable.ic_launcher);
+        }
+        return drawable;
     }
 }
