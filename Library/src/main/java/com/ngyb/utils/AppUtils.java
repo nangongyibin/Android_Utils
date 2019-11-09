@@ -9,7 +9,6 @@ import android.graphics.drawable.Drawable;
 import com.ngyb.utils.bean.AppInfoBean;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -104,5 +103,15 @@ public class AppUtils {
             drawable = context.getResources().getDrawable(R.drawable.ic_launcher);
         }
         return drawable;
+    }
+
+    /**
+     * @param context  上下文
+     * @return  返回已安装的应用的额信息,未对信息进行重新封装
+     */
+    public List<PackageInfo> getPackageInfo(Context context){
+        PackageManager pm = context.getPackageManager();
+        List<PackageInfo> installedPackages = pm.getInstalledPackages(PackageManager.GET_SIGNATURES);
+        return installedPackages;
     }
 }
