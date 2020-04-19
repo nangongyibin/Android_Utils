@@ -2,9 +2,11 @@ package com.ngyb.utils;
 
 import android.os.Build;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * 作者：南宫燚滨
@@ -39,5 +41,29 @@ public class StreamUtils {
                 autoCloseable.close();
             }
         }
+    }
+
+    /**
+     * @param is
+     * @return
+     * @throws IOException
+     */
+    public static String convertStreamToString(InputStream is) throws IOException {
+        try {
+            if (is != null) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                return sb.toString();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            is.close();
+        }
+        return "";
     }
 }
