@@ -4,6 +4,9 @@ import android.os.Build;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +18,7 @@ import java.io.InputStreamReader;
  * 日期：2019/9/4 21:48
  */
 public class StreamUtils {
+
 
     /**
      * @param is
@@ -65,5 +69,46 @@ public class StreamUtils {
             is.close();
         }
         return "";
+    }
+
+    public static void print(byte[] bytes) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < bytes.length; i++) {
+            sb.append(bytes[i]).append(" ");
+        }
+    }
+
+    public static String file2String(String path) {
+        try {
+            FileReader reader = new FileReader(new File(path));
+            char[] buffer = new char[1024];
+            int len = -1;
+            StringBuffer sb = new StringBuffer();
+            while ((len = reader.read(buffer)) != -1) {
+                sb.append(buffer, 0, len);
+            }
+            return sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void string2File(String data, String path) {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(new File(path));
+            writer.write(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
