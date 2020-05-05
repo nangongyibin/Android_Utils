@@ -27,9 +27,8 @@ import javax.crypto.NoSuchPaddingException;
  * 日期：2020/5/4 10:42
  */
 public class RSA {
-
-    private static String PRIVATEKEY;
-    private static String PUBLICKEY;
+    private static String PRIVATEKEY = "MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDE7cMevqWyT8qYAUd5Jscj4Bz2I4QSe8PRYeMYkYG8rKg2952JAXFtEEf/KBSIWuZ4+h6EcI/dMxdPSeoaFULWD0u1ZBvh50Ay7t7TJpNaHK5wdSfWHE9sfuLoPvva2nBHHRTQ3/qIYFadeRSQo8t70MmOtprGDmWS6UzUnA7Jj3PLFQ/2eVC5D90U3ATqMgtVwv+ARIE1NsNzsvd2/rE5irMVHWHaU+8evvD33B3O/nNnThNyV+Kak4cEGyuQKbbA5+5mYPgC/U9+g7C16PKO/sNySpuzkfs9wkQMzg2Yk1VbkPIxhSviS/zJ25YfD7bXZMx6VuI44itQbs/ouGG1AgMBAAECggEBALzM9vTS8ykxNprlHxEYDHRouVuCUW0nG2Xy4zb6ydeJ8PxCCdcAey6FHYGTe5v/CleR9RAkmskH4qExzC+Vkq6Hm54cjF7YxsQOH7NwmHUcamGG8Npl6f+q5wCi4fPA2URUrVBUbG2zb1cqbnz9jGj4k0Uv7NNVmixvYCm2NLcoEXJ9QVQlnYcamW+9rVeO0neXIaFuCenwz2fIGC8ot6q9MiQne4vVnuqLCTTMU5b/pLQJ/J4BFE5rPBB4LO6i0gYyF8Ymsxb6yHD+oipKaeOFfsu0RpcVhsJ2ecy/3U/QTko9Y+cKPiAewbIU8SIjQMHU/aNdRFYDJpmawwq2j0ECgYEA861J6elm6SU6eyWyTNLl6+d+tpf6tBhoOYb1fGb/iVhv1AWzhX9246aA2gVFLImPU7NmWAxwAKNcH3vp3uSPcfesH2B5O4JNnf2ZXgybsk0R3uSNsbA44PoUPHhqIobMxuKOd9Gp1HZtMllLskbHEPLhFiHaHAH1HsTxm/9xti8CgYEAzuNCK2QSZdSqB3lWD1vTzpHBirbPhjgDLInAahVnXcbxryPouJ4RvU57Btivz436IDWSqCJxnn8S2wAf1thCMdglMjVN6ok8HUeFAVVZ8istOcBxakKZD/896yTPs3bDoXcSU6I6PJYPi5fo3GJnJR9KzceoGBRYTMUceZOkkVsCgYEAko4OfliaRG7XlWk+q2XMUu2QEFGnvtlPFgpNatyno/tEhshHCGt5HcHujTHOQNMbGMQ1MY+JbVjS9zyXlC7y9yB2rQhg4aGk/PihXSdIHRytOtlLPys1ilneAeCKNOnOD3ADL50x/06arkV2eWqIH3F0XtNNUrr6qd7ZUXF4+pECgYEAtyhy2D9MGmLf9KXzDr3ZEjPwCII3zzefd7qsYj54uIj8RnWf/nHSeqoUOMd1PmcPXZyQLdHwjMUrSD8f8PCcCcy1gXG3fT/pvHIoyjlp2/9llo9M2SoEoCj0BE0epF8sarIjw28H58NiF89xFEr5zd+aNfvgURER60VGJEwVkakCgYAgyvEcRUHHRysXGp/u+s4JD9CqiDoMkdWm7drKkuhvztdQuZb5Y+/v2jBbr3k3buZmH4paEDxmvm7LI1UY0dP/pHK4mq9k2icfmpmNIPptCKPwaIdo7ubZLdjRaYVJCqoz5bQjl/0d335N8LXu2rafo1km/os0FbFmGdOO9o5sdQ==";
+    private static String PUBLICKEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxO3DHr6lsk/KmAFHeSbHI+Ac9iOEEnvD0WHjGJGBvKyoNvediQFxbRBH/ygUiFrmePoehHCP3TMXT0nqGhVC1g9LtWQb4edAMu7e0yaTWhyucHUn1hxPbH7i6D772tpwRx0U0N/6iGBWnXkUkKPLe9DJjraaxg5lkulM1JwOyY9zyxUP9nlQuQ/dFNwE6jILVcL/gESBNTbDc7L3dv6xOYqzFR1h2lPvHr7w99wdzv5zZ04TclfimpOHBBsrkCm2wOfuZmD4Av1PfoOwtejyjv7Dckqbs5H7PcJEDM4NmJNVW5DyMYUr4kv8yduWHw+212TMelbiOOIrUG7P6LhhtQIDAQAB";
     public static final int MAX_ENCRYPT_SIZE = 117;
     public static final int MAX_DECRYPT_SIZE = 128;
 
@@ -42,8 +41,8 @@ public class RSA {
             PublicKey aPublic = keyPair.getPublic();
             PRIVATEKEY = Base64.encode(aPrivate.getEncoded());
             PUBLICKEY = Base64.encode(aPublic.getEncoded());
-            System.out.println("私钥："+PRIVATEKEY);
-            System.out.println("公钥："+PUBLICKEY);
+            System.out.println("私钥：" + PRIVATEKEY);
+            System.out.println("公钥：" + PUBLICKEY);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -109,7 +108,7 @@ public class RSA {
                     buffer = cipher.doFinal(bytes, offset, bytes.length - offset);
                     offset = bytes.length;
                 }
-                baos.write(buffer,0,buffer.length);
+                baos.write(buffer, 0, buffer.length);
             }
             return Base64.encode(baos.toByteArray());
         } catch (NoSuchAlgorithmException e) {
@@ -148,7 +147,7 @@ public class RSA {
                     buffer = cipher.doFinal(bytes, offset, bytes.length - offset);
                     offset = bytes.length;
                 }
-                baos.write(buffer,0,buffer.length);
+                baos.write(buffer, 0, buffer.length);
             }
             return baos.toString();
         } catch (NoSuchAlgorithmException e) {
@@ -263,6 +262,6 @@ public class RSA {
         String rsa = rsaEncryptByPublicKey("RSA", "1", getPublicKey("RSA", null));
         System.out.println("公钥加密：" + rsa);
         String ori = rsaDecryptByPrivateKey("RSA", rsa, getPrivateKey("RSA", null));
-        System.out.println("私钥解密："+ori);
+        System.out.println("私钥解密：" + ori);
     }
 }
