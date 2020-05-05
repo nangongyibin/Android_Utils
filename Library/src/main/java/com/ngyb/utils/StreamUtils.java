@@ -1,6 +1,7 @@
 package com.ngyb.utils;
 
 import android.os.Build;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -18,7 +19,7 @@ import java.io.InputStreamReader;
  * 日期：2019/9/4 21:48
  */
 public class StreamUtils {
-
+    private static final String TAG = "StreamUtils";
 
     /**
      * @param is
@@ -76,6 +77,7 @@ public class StreamUtils {
         for (int i = 0; i < bytes.length; i++) {
             sb.append(bytes[i]).append(" ");
         }
+        Log.e(TAG, "print: " + sb.toString());
     }
 
     public static String file2String(String path) {
@@ -97,11 +99,13 @@ public class StreamUtils {
     public static void string2File(String data, String path) {
         FileWriter writer = null;
         try {
+            Log.e(TAG, "string2File: " + path);
             writer = new FileWriter(new File(path));
             writer.write(data);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
+            Log.e(TAG, "string2File: ");
             if (writer != null) {
                 try {
                     writer.close();
