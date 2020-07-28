@@ -12,21 +12,13 @@ import java.lang.invoke.ConstantCallSite;
  * 日期：2019/10/31 17:57
  */
 public class SharedPreferencesUtils {
-    private final Context ctx;
-    private SharedPreferences sp = null;
-
-    public SharedPreferencesUtils(Context ctx) {
-        this.ctx = ctx;
-        if (sp == null) {
-            sp = ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
-        }
-    }
+    private static SharedPreferences sp = null;
 
     /**
-     * @param key  键
+     * @param key   键
      * @param value 值
      */
-    public void setBoolean(String key, boolean value) {
+    public static void setBoolean(Context ctx, String key, boolean value) {
         if (sp == null) {
             sp = ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
         }
@@ -34,28 +26,28 @@ public class SharedPreferencesUtils {
     }
 
     /**
-     * @param key 键
+     * @param key      键
      * @param defValue 默认值
      * @return
      */
-    public boolean getBoolean(String key, boolean defValue) {
+    public static boolean getBoolean(Context ctx, String key, boolean defValue) {
         if (sp == null) {
             sp = ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
         }
         return sp.getBoolean(key, defValue);
     }
 
-    public void setInt(String key,int value){
-        if (sp==null){
-            sp =ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
+    public static void setInt(Context ctx, String key, int value) {
+        if (sp == null) {
+            sp = ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
         }
-        sp.edit().putInt(key,value).apply();
+        sp.edit().putInt(key, value).apply();
     }
 
-    public int getInt(String key,int defValue){
-        if (sp==null){
-            sp =ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
+    public static int getInt(Context ctx, String key, int defValue) {
+        if (sp == null) {
+            sp = ctx.getSharedPreferences("Ngyb.xml", Context.MODE_PRIVATE);
         }
-        return sp.getInt(key,defValue);
+        return sp.getInt(key, defValue);
     }
 }

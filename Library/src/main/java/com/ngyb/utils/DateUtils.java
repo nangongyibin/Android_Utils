@@ -12,7 +12,7 @@ public class DateUtils {
     /**
      * @return 获取当前日期的年
      */
-    public int getCurYear() {
+    public static int getCurYear() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.YEAR);
     }
@@ -20,7 +20,7 @@ public class DateUtils {
     /**
      * @return 获取当前日期的月
      */
-    public int getCurMonth() {
+    public static int getCurMonth() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.MONTH) + 1;
     }
@@ -28,7 +28,7 @@ public class DateUtils {
     /**
      * @return 获取当前日期的日
      */
-    public int getCurDay() {
+    public static int getCurDay() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.DAY_OF_MONTH);
     }

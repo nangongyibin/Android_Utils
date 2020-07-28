@@ -40,7 +40,7 @@ public class StreamUtils {
         }
     }
 
-    public void close(AutoCloseable autoCloseable) throws Exception {
+    public static void close(AutoCloseable autoCloseable) throws Exception {
         if (autoCloseable != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 autoCloseable.close();
@@ -50,15 +50,16 @@ public class StreamUtils {
 
     /**
      * @param is
+     * @param charsetName 编码格式utf-8
      * @return
      * @throws IOException
      */
-    public static String convertStreamToString(InputStream is) throws IOException {
+    public static String convertStreamToString(InputStream is, String charsetName) throws IOException {
         try {
             if (is != null) {
                 StringBuilder sb = new StringBuilder();
                 String line;
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, charsetName));
                 while ((line = reader.readLine()) != null) {
                     sb.append(line).append("\n");
                 }

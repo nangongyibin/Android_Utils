@@ -11,7 +11,7 @@ import android.util.Log;
 public class FileUtils {
     private static final String TAG = "FileUtils";
 
-    public String getFileName(String path) {
+    public static  String getFileName(String path) {
         if (path.isEmpty()) {
             return "";
         } else {

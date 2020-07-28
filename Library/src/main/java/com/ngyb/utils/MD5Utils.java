@@ -16,7 +16,7 @@ public class MD5Utils {
      * @param str 要加密的字符串
      * @return md5加密后的字符串
      */
-    public String encode(String str) {
+    public static String encode(String str) {
         try {
             MessageDigest md5 = MessageDigest.getInstance("md5");
             byte[] digest = md5.digest(str.getBytes());

@@ -15,7 +15,7 @@ import java.io.InputStream;
  */
 public class CopyDBUtils {
 
-    public boolean copyDB(Context context, String assetsFileName, String copyFilePath) {
+    public static boolean copyDB(Context context, String assetsFileName, String copyFilePath) {
         File file = null;
         InputStream is = null;
         FileOutputStream fos = null;

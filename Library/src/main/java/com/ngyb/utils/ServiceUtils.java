@@ -12,7 +12,7 @@ import java.util.List;
  * 日期：2019/11/3 18:02
  */
 public class ServiceUtils {
-    public boolean isServiceRunning(Context ctx, String serviceName) {
+    public static boolean isServiceRunning(Context ctx, String serviceName) {
         ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningServiceInfo> runningServices = am.getRunningServices(1000);
         for (ActivityManager.RunningServiceInfo runningService : runningServices) {

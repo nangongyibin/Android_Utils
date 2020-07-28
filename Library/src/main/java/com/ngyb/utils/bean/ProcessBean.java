@@ -21,6 +21,10 @@ public class ProcessBean {
     private boolean isSys;
     //bean指向的条目有没有选中
     private boolean isCheck;
+    //是否安装到SK卡
+    private boolean isSD;
+    //版本号
+    private String versionName;
 
     public ProcessBean(Drawable drawable, String name, String packageName, int size, boolean isSys, boolean isCheck) {
         this.drawable = drawable;
@@ -77,5 +81,30 @@ public class ProcessBean {
 
     public void setCheck(boolean check) {
         isCheck = check;
+    }
+
+    public boolean isSD() {
+        return isSD;
+    }
+
+    public void setSD(boolean SD) {
+        isSD = SD;
+    }
+
+    public String getVersionName() {
+        return versionName;
+    }
+
+    public void setVersionName(String versionName) {
+        this.versionName = versionName;
+    }
+
+    public ProcessBean(Drawable drawable, String name, String packageName, boolean isSys, boolean isSD, String versionName) {
+        this.drawable = drawable;
+        this.name = name;
+        this.packageName = packageName;
+        this.isSys = isSys;
+        this.isSD = isSD;
+        this.versionName = versionName;
     }
 }

@@ -21,4 +21,13 @@ public class Hex {
         }
         return sb.toString();
     }
+
+    public static String bytesToHex(byte[] buf){
+        char[] chs = new char[buf.length *2];
+        for (int i = 0,offset = 0; i < buf.length; i++) {
+            chs[offset++] = HEX[buf[i]>>4&0xf];
+            chs[offset++] = HEX[buf[i]&0xf];
+        }
+        return new String(chs);
+    }
 }

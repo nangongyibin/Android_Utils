@@ -11,7 +11,7 @@ import com.google.gson.Gson;
  * 日期：2020/5/15 09:27
  */
 public class LogUtils {
-    private static final boolean isPrint = true;
+    private static boolean isPrint = true;
 
     public static void doLog(String tag, String result) {
         if (isPrint) {
@@ -43,5 +43,21 @@ public class LogUtils {
 
     public static void doLog(String tag, Object result) {
         doLog(tag, new Gson().toJson(result));
+    }
+
+    /**
+     * 日志打印i级别
+     *
+     * @param tag
+     * @param message
+     */
+    public static void i(String tag, String message) {
+        if (isPrint) {
+            Log.i(tag, message);
+        }
+    }
+
+    public static void setIsPrint(boolean isPrint) {
+        LogUtils.isPrint = isPrint;
     }
 }
