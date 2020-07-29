@@ -1,6 +1,6 @@
 package com.ngyb.utils.encryption;
 
-import com.ngyb.utils.Hex;
+import com.ngyb.utils.HexUtils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,7 +18,7 @@ public class SHA256 {
         try {
             MessageDigest digest = MessageDigest.getInstance(algorithm);
             byte[] bytes = digest.digest(str.getBytes());
-            String s = Hex.toHex(bytes);
+            String s = HexUtils.toHex(bytes);
             return s;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -36,7 +36,7 @@ public class SHA256 {
                 digest.update(buf, 0, len);
             }
             byte[] bytes = digest.digest();
-            String s = Hex.toHex(bytes);
+            String s = HexUtils.toHex(bytes);
             return s;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

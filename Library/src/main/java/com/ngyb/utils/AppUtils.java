@@ -11,6 +11,7 @@ import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Debug;
 
 import com.jaredrummler.android.processes.AndroidProcesses;
 import com.jaredrummler.android.processes.models.AndroidAppProcess;
@@ -151,10 +152,24 @@ public class AppUtils {
     }
 
     /**
+     * 5.0之前获取手机正在运行的进程的数量
+     *
+     * @param ctx
+     * @return
+     */
+    public static int getRunningProcesSixBottom(Context ctx) {
+        //ActivityManager
+        ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+        //获取手机正在运行的进程
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
+        return runningAppProcesses.size();
+    }
+
+    /**
      * @param ctx 上下文
      * @return 对于6.0以上的系统进行改进
      */
-    public static int getRunningProcess2(Context ctx) {
+    public static int getRunningProcessSixTop(Context ctx) {
         List<AndroidAppProcess> processes = AndroidProcesses.getRunningAppProcesses();
         return processes.size();
     }
@@ -249,6 +264,8 @@ public class AppUtils {
     }
 
     /**
+     * 高版本获取正在运行进程的方法
+     *
      * @param ctx 上下文
      * @return
      */
@@ -285,6 +302,59 @@ public class AppUtils {
                 }
             }
         }
+        return processList;
+    }
+
+
+    public static List<ProcessBean> getAllProcessInfo(Context ctx) {
+        ArrayList<ProcessBean> processList = new ArrayList<>();
+        // 获取 ActivityManager
+        ActivityManager am = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
+        PackageManager pm = ctx.getPackageManager();
+        //获取手机正在运行的进程集合
+        List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = am.getRunningAppProcesses();
+        //循环遍历集合
+        for (int i = 0; i < runningAppProcesses.size(); i++) {
+            //包名
+            ActivityManager.RunningAppProcessInfo processInfo = runningAppProcesses.get(i);
+            String processName = processInfo.processName;
+            //在此获取pid作用是为了能够让ActivityManager获取每一个进程memoryInfo
+            int pid = processInfo.pid;
+            boolean isSys;
+            Drawable drawable;
+            String name;
+            long residentSetSize;
+            try {
+                ApplicationInfo applicationInfo = pm.getApplicationInfo(processName, 0);
+                //应用程序图片和名称
+                drawable = applicationInfo.loadIcon(pm);
+                name = applicationInfo.loadLabel(pm).toString();
+                // 是否为系统级别应用
+                if ((applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == ApplicationInfo.FLAG_SYSTEM) {
+                    //满足此条件，则认为applicationInfo指向的应用是系统级别应用
+                    isSys = true;
+                } else {
+                    isSys = false;
+                }
+                // 根据int数组中的应用唯一性获取多个应用的内存信息对象
+                Debug.MemoryInfo[] processMemoryInfo = am.getProcessMemoryInfo(new int[]{pid});
+                // 因为传一个pid所以得到的数组中索引为0是有值的即指向的应用的memoryInfo
+                Debug.MemoryInfo memoryInfo = processMemoryInfo[0];
+                //获取应用占用的内存大小
+                residentSetSize = memoryInfo.getTotalPss() * 1024;
+            } catch (PackageManager.NameNotFoundException e) {
+                //原来的异常是根据packagename找不到applicationInfo才出现的异常
+                e.printStackTrace();
+                //如果系统不给提供则由api提供必要的信息，构建Javabean对象
+                name = "未命名进程";
+                drawable = ctx.getResources().getDrawable(R.mipmap.ic_launcher);
+                residentSetSize = 0;
+                isSys = true;
+            }
+            ProcessBean processBean = new ProcessBean(drawable, name, processName, (int) residentSetSize, isSys, false);
+            processList.add(processBean);
+        }
+        //返回获取的进程有多少个
         return processList;
     }
 

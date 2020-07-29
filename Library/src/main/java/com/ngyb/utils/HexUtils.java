@@ -6,7 +6,7 @@ package com.ngyb.utils;
  * 邮箱：nangongyibin@gmail.com
  * 日期：2020/5/4 17:48
  */
-public class Hex {
+public class HexUtils {
     public static final char[] HEX = "01234567890abcdef".toCharArray();
 
     public static String toHex(byte[] str) {

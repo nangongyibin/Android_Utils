@@ -16,7 +16,7 @@ import com.ngyb.utils.constant.Constant;
  * 邮箱：nangongyibin@gmail.com
  * 日期：2020/7/26 10:33
  */
-public class NetUtils {
+public class NetUtils extends RegularUtils {
 
     /**
      * 打开网络设置界面
@@ -135,5 +135,13 @@ public class NetUtils {
             }
         }
         return networkType;
+    }
+
+    /**
+     * @param str
+     * @return 是否符合网址格式
+     */
+    public static boolean isURL(String str) {
+        return isMatch(Constant.REGEX_URL, str);
     }
 }

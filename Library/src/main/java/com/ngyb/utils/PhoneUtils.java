@@ -33,7 +33,7 @@ import java.util.List;
  * 邮箱：nangongyibin@gmail.com
  * 日期：2019/11/18 17:50
  */
-public class PhoneUtils {
+public class PhoneUtils extends RegularUtils {
 
     //获取电话号码
     @SuppressLint("MissingPermission")
@@ -46,14 +46,22 @@ public class PhoneUtils {
 
     /**
      * @param mobileNums
-     * @return 验证手机格式
+     * @return 验证手机格式 是否符合手机号格式
      */
     public static boolean isMobile(String mobileNums) {
         if (TextUtils.isEmpty(mobileNums)) {
             return false;
         } else {
-            return mobileNums.matches(Constant.TelRegex);
+            return isMatch(Constant.REGEX_MOBILE, mobileNums);
         }
+    }
+
+    /**
+     * @param telNums
+     * @return 是否符合座机号码格式
+     */
+    public static boolean isTel(String telNums) {
+        return isMatch(Constant.REGEX_TEL, telNums);
     }
 
     /**
