@@ -6,10 +6,12 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +90,21 @@ public class GsonUtils {
     public static <T> List<T> parseJsonToList(String json, Type type) {
         Gson gson = new Gson();
         List<T> list = gson.fromJson(json, type);
+        return list;
+    }
+
+    public static <T> List<T> parseJsonToListNew(String json, Class<T> clz) {
+        Gson gson = new Gson();
+        ArrayList<T> list = new ArrayList<>();
+        try {
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                T t = gson.fromJson(jsonArray.optJSONObject(i).toString(), clz);
+                list.add(t);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return list;
     }
 

@@ -1,6 +1,13 @@
 package com.ngyb.utils;
 
+import android.content.Context;
+import android.content.res.AssetManager;
+
 import com.ngyb.utils.constant.Constant;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * 作者：南宫燚滨
@@ -76,5 +83,20 @@ public class StringUtils extends RegularUtils {
      */
     public static String NullTo(String str) {
         return NullToCustom(str, "");
+    }
+
+    public static String getString(Context context, String filename) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            AssetManager assetManager = context.getAssets();
+            BufferedReader bf = new BufferedReader(new InputStreamReader(assetManager.open(filename)));
+            String line;
+            while ((line = bf.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 }
